@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\PortafolioController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/portafolios',[PortafolioController::class,'index']);
 Route::get('/portafolios/{portafolio}',[PortafolioController::class,'show']);
 
+// Rutas públicas para el blog
+Route::get('/blog',[BlogController::class,'index']);
+Route::get('/blog/{blog}',[BlogController::class,'show']);
+
 
 // Grupo de rutas protegidas
 Route::middleware(['auth:sanctum'])->group(function ()
@@ -52,4 +57,10 @@ Route::middleware(['auth:sanctum'])->group(function ()
     Route::post('/portafolios',[PortafolioController::class,'store']);
     Route::put('/portafolios/{portafolio}',[PortafolioController::class,'update']);
     Route::delete('/portafolios/{portafolio}',[PortafolioController::class,'destroy']);
+
+    // Ruta para el blog
+    Route::post('/blog',[BlogController::class,'store']);
+    Route::put('/blog/{blog}',[BlogController::class,'update']);
+    Route::delete('/blog/{blog}',[BlogController::class,'destroy']);
+
 });
